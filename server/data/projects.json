@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "title": "Example Project",
+    "description": "A sample project entry",
+    "url": "https://example.com",
+    "tags": ["demo", "portfolio"]
+  }
+]
