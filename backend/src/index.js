@@ -22,8 +22,8 @@ app.use(express.json());
 // static public files (e.g. cv.pdf)
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
-// Serve frontend static files from project root so visiting / shows the site
-const frontendRoot = path.join(__dirname, '..', '..');
+// Serve frontend static files from the dedicated frontend folder
+const frontendRoot = path.join(__dirname, '..', '..', 'frontend');
 app.use(express.static(frontendRoot));
 
 app.use('/api/contact', contactRouter);

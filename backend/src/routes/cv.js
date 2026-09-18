@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   if (fs.existsSync(cvPath)) {
     return res.sendFile(cvPath);
   }
-  return res.status(404).json({ error: 'CV not found. Place `cv.pdf` in server/public/' });
+  return res.status(404).json({ error: 'CV not found. Place `cv.pdf` in backend/public/' });
 });
 
 module.exports = router;

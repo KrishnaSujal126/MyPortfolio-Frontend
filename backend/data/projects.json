@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Movie Ticket Booking System",
+    "description": "Developed a Java-based application with seat selection, booking management, and user interaction for a movie ticket booking workflow.",
+    "url": "",
+    "tags": ["Java", "OOP", "Booking System"]
+  },
+  {
+    "id": 2,
+    "title": "AI-Based Healthcare Solution",
+    "description": "Designed an AI-powered healthcare solution to improve diagnosis support and patient care using machine learning basics and data processing.",
+    "url": "",
+    "tags": ["Machine Learning", "Healthcare", "Data Processing"]
+  }
+]

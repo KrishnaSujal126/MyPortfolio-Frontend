@@ -7,7 +7,7 @@ Getting started
 1. Install dependencies
 
 ```bash
-cd server
+cd backend
 npm install
 ```
 
@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-Then open the site in your browser at `http://localhost:4000/index.html` (server now serves the frontend files).
+Then open the site in your browser at `http://localhost:4000/index.html` (backend now serves the frontend files).
 
 3. Configuration
 
@@ -27,9 +27,9 @@ Endpoints
 
 - `POST /api/contact` — JSON body `{ name, email, message }` — sends email or logs submission
 - `GET /api/projects` — returns sample projects JSON
-- `GET /api/cv` — serves `server/public/cv.pdf` if present
+- `GET /api/cv` — serves `backend/public/cv.pdf` if present
 
-Place your CV at `server/public/cv.pdf` to enable the CV endpoint.
+Place your CV at `backend/public/cv.pdf` to enable the CV endpoint.
 
 Database (MySQL)
 
@@ -55,7 +55,7 @@ API additions
 
 Contact persistence
 
-Contact submissions are now saved to the `contacts` table (MySQL) or `contacts` table in SQLite. To view saved contacts in SQLite, open `server/data/sqlite.db`.
+Contact submissions are now saved to the `contacts` table (MySQL) or `contacts` table in SQLite. To view saved contacts in SQLite, open `backend/data/sqlite.db`.
 
 Admin UI
 
@@ -64,7 +64,7 @@ Admin UI
 Deployment
 
 - Heroku: create an app, set environment variables (`ADMIN_TOKEN`, DB vars, SMTP vars, `FRONTEND_URL`), and push this repository. The included `Procfile` starts the server.
-- Render/Other: configure a Node service pointing to `server/src/index.js`. Set the same environment variables.
+- Render/Other: configure a Node service pointing to `backend/src/index.js`. Set the same environment variables.
 
 Vercel frontend + backend on Heroku/Render
 

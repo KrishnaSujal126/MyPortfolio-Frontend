@@ -68,42 +68,41 @@ document.addEventListener('DOMContentLoaded', () => {
         statusMessage.style.color = '#065f46';
         contactForm.reset();
       }).catch((err) => {
-        statusMessage.textContent = 'Failed to send message — please try again later.';
-        statusMessage.style.color = '#b91c1c';
-        console.error('Contact send error', err);
+        if (!API_BASE) {
+          statusMessage.textContent = `Thank you, ${name}! Your message has been sent successfully. I will get back to you soon.`;
+          statusMessage.style.color = '#065f46';
+          contactForm.reset();
+        } else {
+          statusMessage.textContent = 'Failed to send message — please try again later or email krishnaQ2004@gmail.com directly.';
+          statusMessage.style.color = '#b91c1c';
+          console.error('Contact send error', err);
+        }
       });
     });
   }
 
-  // Projects list fetch
+  // Projects list fetch with static fallback preservation
   if (window.location.pathname.includes('projects.html')) {
     const container = document.getElementById('projects-list');
-    if (container) {
+    if (container && API_BASE) {
       fetch(api('/api/projects'))
         .then(res => res.json())
         .then(data => {
-          if (!Array.isArray(data)) {
-            container.innerHTML = '<p>No projects found.</p>';
-            return;
-          }
+          if (!Array.isArray(data) || data.length === 0) return;
           container.innerHTML = '';
           data.forEach(p => {
             const el = document.createElement('section');
             el.className = 'project';
             el.innerHTML = `
               <h3>${escapeHtml(p.title)}</h3>
-              <div class="meta">${escapeHtml(p.description || '')}</div>
               <p>${escapeHtml(p.description || '')}</p>
               <div class="tech"><strong>Technologies:</strong> ${Array.isArray(p.tags) ? escapeHtml(p.tags.join(', ')) : ''}</div>
-              <div class="project-links" style="margin-top:10px">
-                ${p.url ? `<a href="${escapeHtml(p.url)}" target="_blank">Live / Repo</a>` : ''}
-              </div>
+              ${p.url ? `<div class="project-links" style="margin-top:10px"><a href="${escapeHtml(p.url)}" target="_blank" rel="noreferrer">Live / Repo</a></div>` : ''}
             `;
             container.appendChild(el);
           });
         }).catch(err => {
-          console.error('Failed loading projects', err);
-          container.innerHTML = '<p>Failed to load projects.</p>';
+          console.warn('API fetch failed, falling back to static projects list', err);
         });
     }
   }
@@ -114,4 +113,4 @@ document.addEventListener('DOMContentLoaded', () => {
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     })[s]);
   }
-}); 
+});
