@@ -2,20 +2,15 @@
 node_modules/
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 package-lock.json
 
 # dotenv
 *.env
+.env
 
 # sqlite
-<<<<<<< HEAD
 backend/data/sqlite.db
 backend/data/*.db
-=======
-server/data/sqlite.db
-server/data/*.db
->>>>>>> origin/main
 
 # VS Code
 .vscode/
