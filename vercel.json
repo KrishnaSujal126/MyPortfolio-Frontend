@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/googlecdcae0f9e6fd27e4.html", "destination": "/googlecdcae0f9e6fd27e4.html" },
     { "source": "/(google[a-zA-Z0-9_-]+\\.html)", "destination": "/$1" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
