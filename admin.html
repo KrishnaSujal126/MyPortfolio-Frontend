@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Manage Projects</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-main{max-width:900px;margin:28px auto;padding:20px}
+    .proj-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+    .proj-row{display:flex;gap:8px;align-items:center}
+    button.small{padding:6px 8px}
+  </style>
+</head>
+<body>
+  <main class="admin-main">
+    <h1>Admin — Projects</h1>
+    <div id="login">
+      <label>Admin token: <input id="token" type="password"></label>
+      <button id="save-token">Save token</button>
+    </div>
+
+    <section>
+      <h2>Create project</h2>
+      <form id="create" class="proj-form">
+        <input name="title" placeholder="Title" required>
+        <input name="url" placeholder="URL">
+        <textarea name="description" placeholder="Description"></textarea>
+        <input name="tags" placeholder="tags (comma-separated)">
+        <button type="submit">Create</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Existing projects</h2>
+      <div id="list">Loading…</div>
+    </section>
+  </main>
+  <script src="frontend-config.js"></script>
+  <script>
+    const tokenKey = 'admin_token';
+    document.getElementById('save-token').addEventListener('click', ()=>{
+      const v = document.getElementById('token').value.trim();
+      localStorage.setItem(tokenKey, v);
+      alert('Token saved');
+      load();
+    });
+
+    function authHeaders(){
+      const t = localStorage.getItem(tokenKey) || '';
+      return { 'x-admin-token': t, 'Content-Type': 'application/json' };
+    }
+
+    function api(path){
+      const base = (window.API_BASE_URL || '').trim();
+      return base ? `${base.replace(/\/+$/,'')}${path}` : path;
+    }
+    async function load(){
+      const list = document.getElementById('list');
+      try{
+        const res = await fetch(api('/api/projects'));
+        const data = await res.json();
+        if (!Array.isArray(data)) { list.innerText='No projects'; return; }
+        list.innerHTML='';
+        data.forEach(p=>{
+          const div = document.createElement('div'); div.className='proj-row';
+          div.innerHTML = `<strong>${escapeHtml(p.title)}</strong> <button class="small" data-id="${p.id}" data-action="edit">Edit</button> <button class="small" data-id="${p.id}" data-action="del">Delete</button>`;
+          list.appendChild(div);
+        });
+      }catch(e){ list.innerText='Failed to load'; }
+    }
+
+    document.getElementById('create').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const form = e.target;
+      const body = {
+        title: form.title.value.trim(),
+        description: form.description.value.trim(),
+        url: form.url.value.trim(),
+        tags: form.tags.value.split(',').map(s=>s.trim()).filter(Boolean)
+      };
+      try{
+        const res = await fetch(api('/api/projects'), { method:'POST', headers: authHeaders(), body: JSON.stringify(body) });
+        if (!res.ok) throw new Error('Create failed');
+        form.reset(); load();
+      }catch(err){ alert('Error: '+err.message); }
+    });
+
+    document.getElementById('list').addEventListener('click', async (e)=>{
+      const btn = e.target.closest('button'); if(!btn) return;
+      const id = btn.dataset.id; const action = btn.dataset.action;
+      if (action==='del'){
+        if(!confirm('Delete?')) return;
+        try{ const res = await fetch(api('/api/projects/'+id), { method:'DELETE', headers: authHeaders() }); if(!res.ok) throw new Error('delete'); load(); }catch(err){ alert('Delete failed'); }
+      }
+      if (action==='edit'){
+        const title = prompt('New title'); if (title==null) return;
+        try{ const res = await fetch(api('/api/projects/'+id), { method:'PUT', headers: authHeaders(), body: JSON.stringify({ title }) }); if(!res.ok) throw new Error('update'); load(); }catch(err){ alert('Update failed'); }
+      }
+    });
+
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+    load();
+  </script>
+</body>
+</html>

@@ -9,8 +9,13 @@ package-lock.json
 *.env
 
 # sqlite
+<<<<<<< HEAD
 backend/data/sqlite.db
 backend/data/*.db
+=======
+server/data/sqlite.db
+server/data/*.db
+>>>>>>> origin/main
 
 # VS Code
 .vscode/

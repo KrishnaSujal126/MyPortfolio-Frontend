@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Krishna Kant Pandey</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <main class="contact-page" style="max-width:900px; margin:40px auto; padding:24px;">
+    <h1>Contact</h1>
+    <p>If you'd like to work together or have any questions, send me a message — I'll reply as soon as I can.</p>
+
+    <section class="contact-content" style="display:grid; grid-template-columns:1fr 360px; gap:24px; margin-top:20px;">
+      <form class="contact-form" action="#" method="post" style="display:flex; flex-direction:column; gap:12px;">
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" required style="padding:10px; border-radius:6px; border:1px solid #d1d5db; width:100%;">
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required style="padding:10px; border-radius:6px; border:1px solid #d1d5db; width:100%;">
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="6" required style="padding:10px; border-radius:6px; border:1px solid #d1d5db; width:100%;"></textarea>
+        </label>
+        <button type="submit" style="padding:12px 18px; border-radius:8px; border:none; background:#1e3a8a; color:#fff; cursor:pointer; width:160px;">Send Message</button>
+      </form>
+
+      <aside class="contact-info" style="background:#f8fafc; padding:20px; border-radius:12px;">
+        <h3>Contact Info</h3>
+        <p><strong>Email:</strong> krishnaq2004@gmail.com</p>
+        <p><strong>Phone:</strong> +91 9801364715</p>
+        <p><strong>Location:</strong> India</p>
+        <div style="margin-top:12px;">
+          <a href="mailto:krishnaq2004@gmail.com" style="color:#1e3a8a; text-decoration:none;">Email me</a>
+        </div>
+      </aside>
+    </section>
+
+  </main>
+  <script src="frontend-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
