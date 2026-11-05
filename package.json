@@ -1,0 +1,20 @@
+{
+  "name": "krishnakant-portfolio-fullstack",
+  "version": "1.0.0",
+  "description": "Full Stack Portfolio Website for Krishna Kant Pandey",
+  "main": "backend/src/index.js",
+  "scripts": {
+    "start": "node backend/src/index.js",
+    "dev": "node backend/src/index.js",
+    "backend": "cd backend && npm run dev"
+  },
+  "keywords": [
+    "portfolio",
+    "fullstack",
+    "java",
+    "spring-boot",
+    "express"
+  ],
+  "author": "Krishna Kant Pandey",
+  "license": "MIT"
+}

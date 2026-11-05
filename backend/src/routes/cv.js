@@ -4,11 +4,19 @@ const fs = require('fs');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const cvPath = path.join(__dirname, '..', '..', 'public', 'cv.pdf');
-  if (fs.existsSync(cvPath)) {
-    return res.sendFile(cvPath);
+  const candidates = [
+    path.join(__dirname, '..', 'public', 'cv.pdf'),
+    path.join(__dirname, '..', '..', 'public', 'cv.pdf'),
+    path.join(__dirname, '..', '..', 'frontend', 'resume.pdf'),
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return res.sendFile(candidate);
+    }
   }
-  return res.status(404).json({ error: 'CV not found. Place `cv.pdf` in backend/public/' });
+
+  return res.status(404).json({ error: 'CV file not found.' });
 });
 
 module.exports = router;

@@ -1,76 +1,123 @@
-# MyPortfolio Backend (Node/Express)
+# Krishna Kant Pandey — Portfolio Backend (Node.js & Express)
 
-Quick scaffold for serving portfolio APIs: contact form, projects list, and CV download.
+A robust backend REST API service providing dynamic project management, contact form submission persistence, and resume delivery for Krishna Kant Pandey's portfolio.
 
-Getting started
+---
 
-1. Install dependencies
+## ⚡ Quick Start
 
+### 1. Install Dependencies
 ```bash
 cd backend
 npm install
 ```
 
-2. Run (development)
-
+### 2. Run Locally
 ```bash
+# Production mode
+npm start
+
+# Development mode (auto-reload via nodemon)
 npm run dev
 ```
 
-Then open the site in your browser at `http://localhost:4000/index.html` (backend now serves the frontend files).
+The server will start on **`http://localhost:4000`** and automatically serve the frontend portfolio pages:
+* **Home**: `http://localhost:4000/index.html`
+* **About**: `http://localhost:4000/about.html`
+* **Projects**: `http://localhost:4000/projects.html`
+* **CV**: `http://localhost:4000/cv.html`
+* **Contact**: `http://localhost:4000/contact.html`
+* **Admin Dashboard**: `http://localhost:4000/admin.html`
 
-3. Configuration
+---
 
-Copy `.env.example` to `.env` and set `SMTP_HOST`, `SMTP_USER`, and `SMTP_PASS` to enable email sending. If SMTP is not configured, contact submissions are logged to the server console.
+## 📡 REST API Endpoints
 
-Endpoints
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|---|
+| `GET` | `/api/health` | Healthcheck and server status | No |
+| `GET` | `/api/projects` | Fetch all portfolio projects | No |
+| `POST` | `/api/projects` | Add a new project (`{ title, description, url, tags }`) | Yes (`x-admin-token`) |
+| `PUT` | `/api/projects/:id` | Update an existing project | Yes (`x-admin-token`) |
+| `DELETE` | `/api/projects/:id` | Delete a project | Yes (`x-admin-token`) |
+| `POST` | `/api/contact` | Submit contact message (`{ name, email, subject, message }`) | No |
+| `GET` | `/api/cv` | Direct stream of Krishna's resume PDF | No |
 
-- `POST /api/contact` — JSON body `{ name, email, message }` — sends email or logs submission
-- `GET /api/projects` — returns sample projects JSON
-- `GET /api/cv` — serves `backend/public/cv.pdf` if present
+---
 
-Place your CV at `backend/public/cv.pdf` to enable the CV endpoint.
+## 🗄️ Database Architecture
 
-Database (MySQL)
+The backend supports **dual database backends**:
 
-1. Create a MySQL database and user, then run the init SQL to create the `projects` table and seed sample data:
+### 1. SQLite (Default, Zero-Setup)
+* Active by default out-of-the-box — no external database server needed.
+* Database file is automatically created at `backend/data/sqlite.db`.
+* Pre-seeded with your 3 key software engineering projects:
+  1. **AI Smart Healthcare & Triage System**
+  2. **College PYQ Management System**
+  3. **Movie Ticket Booking System**
 
-```bash
-# Example (adjust user/db names as needed)
-mysql -u root -p
-CREATE DATABASE myportfolio;
-USE myportfolio;
-SOURCE db/init.sql;
+### 2. MySQL (Optional Production DB)
+To use MySQL:
+1. Create a database:
+   ```sql
+   CREATE DATABASE myportfolio;
+   USE myportfolio;
+   SOURCE db/init.sql;
+   ```
+2. In `.env`, set:
+   ```env
+   DB_TYPE=mysql
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USER=root
+   DB_PASS=your_password
+   DB_NAME=myportfolio
+   ```
+
+---
+
+## 📧 Contact Form & Email Notifications
+
+When a visitor submits a message through [`contact.html`](../frontend/contact.html):
+1. **Database Persistence**: The message is automatically recorded in the `contacts` table in SQLite (`backend/data/sqlite.db`) or MySQL.
+2. **Email Forwarding (SMTP)**:
+   * If SMTP credentials are configured in `.env`, the message is instantly emailed to your inbox (`krishnaQ2004@gmail.com`).
+   * If SMTP credentials are omitted, the server logs the contact details to the console while safely storing it in the database.
+
+---
+
+## ⚙️ Environment Variables (`.env`)
+
+Copy `.env.example` to `.env`:
+```env
+PORT=4000
+FRONTEND_URL=http://localhost:4000
+
+# Security token for Admin UI (projects management)
+ADMIN_TOKEN=your_secret_admin_token
+
+# Optional Database: 'sqlite' (default) or 'mysql'
+DB_TYPE=sqlite
+SQLITE_FILE=data/sqlite.db
+
+# Optional SMTP Email Configuration
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_app_password
+CONTACT_TO=krishnaQ2004@gmail.com
 ```
 
-2. Set database variables in `.env` (see `.env.example`): `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME`.
+---
 
-The `GET /api/projects` endpoint now reads projects from the `projects` table. Tags are stored as JSON text in the `tags` column.
+## 🚀 Deployment Options
 
-API additions
-
-- `POST /api/projects` — create a project, body: `{ title, description, url, tags }` — returns `{ id }`
-- `PUT /api/projects/:id` — update a project
-- `DELETE /api/projects/:id` — delete a project
-
-Contact persistence
-
-Contact submissions are now saved to the `contacts` table (MySQL) or `contacts` table in SQLite. To view saved contacts in SQLite, open `backend/data/sqlite.db`.
-
-Admin UI
-
-- Open `admin.html` and enter your `ADMIN_TOKEN` (set as `ADMIN_TOKEN` env variable on the server) to manage projects. The admin UI sends `x-admin-token` header to protected endpoints.
-
-Deployment
-
-- Heroku: create an app, set environment variables (`ADMIN_TOKEN`, DB vars, SMTP vars, `FRONTEND_URL`), and push this repository. The included `Procfile` starts the server.
-- Render/Other: configure a Node service pointing to `backend/src/index.js`. Set the same environment variables.
-
-Vercel frontend + backend on Heroku/Render
-
-1. Deploy the backend from `server/` to Heroku or Render.
-2. Set `FRONTEND_URL` to your Vercel site URL in the backend environment.
-3. In `frontend-config.js`, set `window.API_BASE_URL` to your deployed backend URL, e.g. `https://my-backend.herokuapp.com`.
-4. Deploy the frontend to Vercel by selecting the root project folder.
-
-The frontend will use `window.API_BASE_URL` when deployed separately. For local dev, it falls back to the local backend path.
+* **Heroku / Render / Railway**:
+  * Set root to `backend/`.
+  * Set `FRONTEND_URL` to your production domain.
+  * Start command: `node src/index.js` (uses included `Procfile`).
+* **Vercel**:
+  * Deploy `frontend/` as a static site.
+  * In `frontend/frontend-config.js`, set `window.API_BASE_URL = 'https://your-backend-api.com';`.

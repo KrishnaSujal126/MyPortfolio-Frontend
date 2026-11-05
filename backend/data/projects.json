@@ -1,16 +1,23 @@
 [
   {
     "id": 1,
-    "title": "Movie Ticket Booking System",
-    "description": "Developed a Java-based application with seat selection, booking management, and user interaction for a movie ticket booking workflow.",
-    "url": "",
-    "tags": ["Java", "OOP", "Booking System"]
+    "title": "AI Smart Healthcare & Triage System",
+    "description": "Engineered an AI Symptom Triage Engine processing natural-language complaints with risk categorization, 10+ Spring Boot REST APIs, and role-based workflows for Patients, Doctors, and Admins.",
+    "url": "https://github.com/KrishnaSujal126",
+    "tags": ["Java", "Spring Boot", "Spring Data JPA", "AI/NLP", "REST APIs", "HTML5/CSS3/JS"]
   },
   {
     "id": 2,
-    "title": "AI-Based Healthcare Solution",
-    "description": "Designed an AI-powered healthcare solution to improve diagnosis support and patient care using machine learning basics and data processing.",
-    "url": "",
-    "tags": ["Machine Learning", "Healthcare", "Data Processing"]
+    "title": "College PYQ Management System",
+    "description": "Web-based academic PYQ management portal to search, filter by semester and subject, and download question papers with Spring Boot REST APIs and MySQL.",
+    "url": "https://github.com/KrishnaSujal126",
+    "tags": ["Java", "Spring Boot", "MySQL", "REST APIs", "JavaScript"]
+  },
+  {
+    "id": 3,
+    "title": "Movie Ticket Booking System",
+    "description": "Java-based application featuring interactive seat selection, booking lifecycle management, dynamic pricing calculation, and OOP architecture.",
+    "url": "https://github.com/KrishnaSujal126",
+    "tags": ["Java", "OOP", "Data Structures", "Algorithms"]
   }
 ]

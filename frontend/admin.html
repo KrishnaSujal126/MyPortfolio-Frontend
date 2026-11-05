@@ -1,106 +1,394 @@
 <!doctype html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Admin — Manage Projects</title>
+  <title>Admin Dashboard & Inbox | Krishna Kant Pandey</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22><text y=%2226%22 font-size=%2224%22>⚡</text></svg>">
   <style>
-    .admin-main{max-width:900px;margin:28px auto;padding:20px}
-    .proj-form{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-    .proj-row{display:flex;gap:8px;align-items:center}
-    button.small{padding:6px 8px}
+    .admin-container {
+      max-width: 920px;
+      margin: 40px auto;
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+    .admin-tab-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 9px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+    .admin-tab-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: #ffffff;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .message-card {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 14px;
+      transition: all var(--transition-fast);
+    }
+    .message-card:hover {
+      border-color: var(--border-hover);
+    }
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .message-sender {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+    }
+    .message-email {
+      font-size: 0.88rem;
+      color: var(--accent-cyan);
+    }
+    .message-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .message-subject {
+      font-weight: 600;
+      color: var(--accent-primary);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .message-body {
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+    .proj-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-  <main class="admin-main">
-    <h1>Admin — Projects</h1>
-    <div id="login">
-      <label>Admin token: <input id="token" type="password"></label>
-      <button id="save-token">Save token</button>
+  <div class="bg-ambient">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <main class="admin-container">
+    <!-- Top Header -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+      <div>
+        <a href="index.html" style="font-size: 0.88rem; color:var(--accent-primary); display:inline-flex; align-items:center; gap:6px; margin-bottom:6px;">
+          ← Back to Portfolio
+        </a>
+        <h1 style="font-size: 1.8rem;">Admin Dashboard & Messages</h1>
+      </div>
+      <button class="theme-toggle-btn" type="button" style="width:auto; padding: 6px 12px;">
+        <span class="theme-icon"></span>
+      </button>
     </div>
 
-    <section>
-      <h2>Create project</h2>
-      <form id="create" class="proj-form">
-        <input name="title" placeholder="Title" required>
-        <input name="url" placeholder="URL">
-        <textarea name="description" placeholder="Description"></textarea>
-        <input name="tags" placeholder="tags (comma-separated)">
-        <button type="submit">Create</button>
-      </form>
+    <!-- Token Auth Section -->
+    <div class="card" style="margin-bottom: 24px; padding: 18px 24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h3 style="font-size: 1.05rem; margin-bottom: 2px;">Admin Authentication</h3>
+          <span style="font-size: 0.82rem; color:var(--text-muted);">Default local token is <code>admin123</code> (or custom <code>ADMIN_TOKEN</code> in backend <code>.env</code>)</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <input id="token" type="password" placeholder="Admin Token" class="search-input" style="width: 180px; border-radius:var(--radius-md); padding: 8px 12px;">
+          <button id="save-token" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.88rem;">Save Token</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" data-tab="inbox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>📬 Messages Inbox</span>
+        <span id="inbox-count" class="tag" style="padding: 2px 8px; font-size: 0.75rem;">0</span>
+      </button>
+      <button class="admin-tab-btn" data-tab="projects">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>Manage Projects</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Messages Inbox -->
+    <section id="tab-inbox" class="tab-content active">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
+        <h2 style="font-size: 1.3rem;">Received Inquiries & Messages</h2>
+        <button id="refresh-messages" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+          ↻ Refresh Inbox
+        </button>
+      </div>
+
+      <div id="messages-list">
+        <div style="text-align:center; padding: 30px; color:var(--text-muted);">
+          Loading messages from database...
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Existing projects</h2>
-      <div id="list">Loading…</div>
+    <!-- Tab 2: Manage Projects -->
+    <section id="tab-projects" class="tab-content">
+      <!-- Create Project Form -->
+      <div class="card" style="margin-bottom: 24px; padding: 24px;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Publish New Project</h3>
+        <form id="create" class="contact-form">
+          <div class="form-field">
+            <label>Project Title *</label>
+            <input name="title" placeholder="e.g. AI Medical Triage Engine" required>
+          </div>
+          <div class="form-field">
+            <label>Repository / Live URL</label>
+            <input name="url" placeholder="https://github.com/...">
+          </div>
+          <div class="form-field">
+            <label>Description</label>
+            <textarea name="description" rows="3" placeholder="Brief overview of features, architecture, and tech accomplishments..."></textarea>
+          </div>
+          <div class="form-field">
+            <label>Tags (comma-separated)</label>
+            <input name="tags" placeholder="Java, Spring Boot, MySQL, REST APIs">
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+            <span>Publish to Portfolio</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Existing Projects List -->
+      <div class="card" style="padding: 24px;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Current Projects in Database</h3>
+        <div id="list" style="color:var(--text-secondary);">Loading projects...</div>
+      </div>
     </section>
   </main>
+
   <script src="frontend-config.js"></script>
+  <script src="script.js"></script>
   <script>
     const tokenKey = 'admin_token';
-    document.getElementById('save-token').addEventListener('click', ()=>{
+    const defaultToken = localStorage.getItem(tokenKey) || 'admin123';
+    document.getElementById('token').value = defaultToken;
+
+    document.getElementById('save-token').addEventListener('click', () => {
       const v = document.getElementById('token').value.trim();
       localStorage.setItem(tokenKey, v);
       alert('Token saved');
-      load();
+      loadAll();
     });
 
-    function authHeaders(){
-      const t = localStorage.getItem(tokenKey) || '';
+    // Tab switching
+    document.querySelectorAll('.admin-tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab-btn').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach((tc) => tc.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetTab = btn.getAttribute('data-tab');
+        document.getElementById(`tab-${targetTab}`).classList.add('active');
+      });
+    });
+
+    document.getElementById('refresh-messages').addEventListener('click', loadMessages);
+
+    function authHeaders() {
+      const t = localStorage.getItem(tokenKey) || 'admin123';
       return { 'x-admin-token': t, 'Content-Type': 'application/json' };
     }
 
-    function api(path){
+    function api(path) {
       const base = (window.API_BASE_URL || '').trim();
       return base ? `${base.replace(/\/+$/,'')}${path}` : path;
     }
-    async function load(){
-      const list = document.getElementById('list');
-      try{
-        const res = await fetch(api('/api/projects'));
+
+    // Load Messages Inbox
+    async function loadMessages() {
+      const msgList = document.getElementById('messages-list');
+      const countBadge = document.getElementById('inbox-count');
+      try {
+        const res = await fetch(api('/api/contact'), { headers: authHeaders() });
+        if (!res.ok) throw new Error('Auth or fetch failed');
         const data = await res.json();
-        if (!Array.isArray(data)) { list.innerText='No projects'; return; }
-        list.innerHTML='';
-        data.forEach(p=>{
-          const div = document.createElement('div'); div.className='proj-row';
-          div.innerHTML = `<strong>${escapeHtml(p.title)}</strong> <button class="small" data-id="${p.id}" data-action="edit">Edit</button> <button class="small" data-id="${p.id}" data-action="del">Delete</button>`;
-          list.appendChild(div);
+
+        if (!Array.isArray(data) || data.length === 0) {
+          msgList.innerHTML = `<div style="text-align:center; padding: 40px; color:var(--text-muted); background:var(--bg-input); border-radius:var(--radius-md);">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:8px; opacity:0.6;"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
+            <p>No messages received yet. When visitors fill out your contact form, they appear here!</p>
+          </div>`;
+          countBadge.textContent = '0';
+          return;
+        }
+
+        countBadge.textContent = String(data.length);
+        msgList.innerHTML = '';
+        data.forEach((msg) => {
+          const card = document.createElement('div');
+          card.className = 'message-card';
+          card.innerHTML = `
+            <div class="message-header">
+              <div>
+                <span class="message-sender">${escapeHtml(msg.name)}</span>
+                <span style="color:var(--text-muted);"> • </span>
+                <a href="mailto:${escapeHtml(msg.email)}" class="message-email">${escapeHtml(msg.email)}</a>
+              </div>
+              <div class="message-date">${escapeHtml(new Date(msg.created_at).toLocaleString())}</div>
+            </div>
+            ${msg.subject ? `<div class="message-subject">Subject: ${escapeHtml(msg.subject)}</div>` : ''}
+            <div class="message-body">${escapeHtml(msg.message)}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <a href="mailto:${escapeHtml(msg.email)}?subject=Re: ${encodeURIComponent(msg.subject || 'Portfolio Inquiry')}" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.82rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                <span>Reply by Email</span>
+              </a>
+              <button class="btn btn-outline delete-msg-btn" data-id="${msg.id}" style="padding: 6px 12px; font-size: 0.82rem; border-color:#ef4444; color:#ef4444;">
+                Delete
+              </button>
+            </div>
+          `;
+          msgList.appendChild(card);
         });
-      }catch(e){ list.innerText='Failed to load'; }
+      } catch (err) {
+        msgList.innerHTML = `<div style="padding:20px; color:#f87171; background:rgba(239,68,68,0.1); border-radius:var(--radius-md);">
+          Could not connect to backend server. Make sure your backend is running (<code>npm start</code> in <code>backend/</code>) and verify your Admin Token.
+        </div>`;
+      }
     }
 
-    document.getElementById('create').addEventListener('submit', async (e)=>{
+    // Delete message
+    document.getElementById('messages-list').addEventListener('click', async (e) => {
+      const btn = e.target.closest('.delete-msg-btn');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      if (!confirm('Are you sure you want to delete this message?')) return;
+      try {
+        const res = await fetch(api('/api/contact/' + id), { method: 'DELETE', headers: authHeaders() });
+        if (!res.ok) throw new Error('Delete failed');
+        loadMessages();
+      } catch (err) {
+        alert('Could not delete message: ' + err.message);
+      }
+    });
+
+    // Load Projects
+    async function loadProjects() {
+      const list = document.getElementById('list');
+      try {
+        const res = await fetch(api('/api/projects'));
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) { list.innerText = 'No projects found.'; return; }
+        list.innerHTML = '';
+        data.forEach((p) => {
+          const div = document.createElement('div');
+          div.className = 'proj-row';
+          div.innerHTML = `
+            <div>
+              <strong style="color:var(--text-primary); font-size:1rem;">${escapeHtml(p.title)}</strong>
+              ${p.tags && p.tags.length ? `<div style="font-size:0.78rem; color:var(--text-muted); margin-top:3px;">${escapeHtml(p.tags.join(', '))}</div>` : ''}
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-secondary" style="padding:5px 12px; font-size:0.82rem;" data-id="${p.id}" data-action="edit">Edit</button>
+              <button class="btn btn-outline" style="padding:5px 12px; font-size:0.82rem; border-color:#ef4444; color:#ef4444;" data-id="${p.id}" data-action="del">Delete</button>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+      } catch (e) {
+        list.innerText = 'Backend server not running or failed to load projects.';
+      }
+    }
+
+    document.getElementById('create').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
       const body = {
         title: form.title.value.trim(),
         description: form.description.value.trim(),
         url: form.url.value.trim(),
-        tags: form.tags.value.split(',').map(s=>s.trim()).filter(Boolean)
+        tags: form.tags.value.split(',').map((s) => s.trim()).filter(Boolean)
       };
-      try{
-        const res = await fetch(api('/api/projects'), { method:'POST', headers: authHeaders(), body: JSON.stringify(body) });
-        if (!res.ok) throw new Error('Create failed');
-        form.reset(); load();
-      }catch(err){ alert('Error: '+err.message); }
+      try {
+        const res = await fetch(api('/api/projects'), { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+        if (!res.ok) throw new Error('Create failed - check admin token');
+        alert('Project created successfully!');
+        form.reset();
+        loadProjects();
+      } catch (err) { alert('Error: ' + err.message); }
     });
 
-    document.getElementById('list').addEventListener('click', async (e)=>{
-      const btn = e.target.closest('button'); if(!btn) return;
-      const id = btn.dataset.id; const action = btn.dataset.action;
-      if (action==='del'){
-        if(!confirm('Delete?')) return;
-        try{ const res = await fetch(api('/api/projects/'+id), { method:'DELETE', headers: authHeaders() }); if(!res.ok) throw new Error('delete'); load(); }catch(err){ alert('Delete failed'); }
+    document.getElementById('list').addEventListener('click', async (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if (action === 'del') {
+        if (!confirm('Are you sure you want to delete this project?')) return;
+        try {
+          const res = await fetch(api('/api/projects/' + id), { method: 'DELETE', headers: authHeaders() });
+          if (!res.ok) throw new Error('Delete failed');
+          loadProjects();
+        } catch (err) { alert('Delete failed: ' + err.message); }
       }
-      if (action==='edit'){
-        const title = prompt('New title'); if (title==null) return;
-        try{ const res = await fetch(api('/api/projects/'+id), { method:'PUT', headers: authHeaders(), body: JSON.stringify({ title }) }); if(!res.ok) throw new Error('update'); load(); }catch(err){ alert('Update failed'); }
+      if (action === 'edit') {
+        const title = prompt('Enter new project title:');
+        if (title == null) return;
+        try {
+          const res = await fetch(api('/api/projects/' + id), { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ title }) });
+          if (!res.ok) throw new Error('Update failed');
+          loadProjects();
+        } catch (err) { alert('Update failed: ' + err.message); }
       }
     });
 
-    function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
-    load();
+    function loadAll() {
+      loadMessages();
+      loadProjects();
+    }
+
+    loadAll();
   </script>
 </body>
 </html>

@@ -1,41 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krishna Kant Pandey | Portfolio</title>
+  <title>Krishna Kant Pandey | Software Engineer & Full Stack Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Krishna Kant Pandey — B.Tech Computer Science student (2023–2027) proficient in Java, Spring Boot, C++, Data Structures & Algorithms, and Full Stack Web Development.">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22><text y=%2226%22 font-size=%2224%22>⚡</text></svg>">
 </head>
 <body>
-  <div class="container">
-    <aside class="slidebar">
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="cv.html">CV</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+  <!-- Ambient background lighting -->
+  <div class="bg-ambient">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <!-- Mobile Top Header -->
+  <header class="mobile-header">
+    <div class="mobile-brand">
+      <img src="my picture.png" alt="Krishna Kant Pandey">
+      <span>Krishna Kant Pandey</span>
+    </div>
+    <div class="mobile-actions">
+      <button class="theme-toggle-btn" aria-label="Toggle Theme" style="width: auto; padding: 6px 10px;">
+        <span class="theme-icon"></span>
+      </button>
+      <button class="menu-toggle-btn" aria-label="Toggle Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="sidebar-overlay"></div>
+
+  <div class="app-container">
+    <!-- Desktop & Drawer Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-profile">
+          <div class="avatar-wrapper">
+            <div class="avatar-ring"></div>
+            <img class="avatar-img" src="my picture.png" alt="Krishna Kant Pandey">
+          </div>
+          <h2 class="profile-name">Krishna Kant Pandey</h2>
+          <p class="profile-title">Aspiring Full Stack Developer<br><span style="color:var(--accent-primary);font-weight:600;">B.Tech CSE (2023–2027)</span></p>
+          <div class="status-pill">
+            <span class="status-dot-pulse"></span>
+            Open for Internships
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="index.html" class="nav-link active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="about.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>About Me</span>
+              </a>
+            </li>
+            <li>
+              <a href="projects.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Projects</span>
+              </a>
+            </li>
+            <li>
+              <a href="cv.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>CV / Resume</span>
+              </a>
+            </li>
+            <li>
+              <a href="contact.html" class="nav-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>Contact</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="social-icons-row">
+          <a href="https://linkedin.com/in/krishnakant-pandey-a46a32327" target="_blank" rel="noreferrer" class="social-icon-btn" title="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.75a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+          </a>
+          <a href="https://github.com/KrishnaSujal126" target="_blank" rel="noreferrer" class="social-icon-btn" title="GitHub">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          </a>
+          <a href="mailto:krishnaQ2004@gmail.com" class="social-icon-btn" title="Email">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+          <a href="tel:+919801364715" class="social-icon-btn" title="Phone">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </a>
+        </div>
+
+        <button class="theme-toggle-btn" type="button">
+          <span class="theme-icon"></span>
+          <span class="theme-text">Light Mode</span>
+        </button>
+      </div>
     </aside>
 
-    <main class="main">
-      <div class="info">
-        <div class="intro">
-          <p class="eyebrow">Aspiring Full Stack Developer</p>
-          <h1>Hi, I'm Krishna Kant Pandey</h1>
-          <p>Welcome to my portfolio. I am a B.Tech Computer Science undergraduate (2023–2027) with a strong foundation in C++, Java, Spring Boot, Data Structures & Algorithms, and web technologies.</p>
-        </div>
-        <div class="picture">
-          <img src="my picture.jpeg" alt="Krishna Kant Pandey">
-        </div>
-      </div>
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Available for Software Engineering Internships
+          </div>
 
-      <div class="button">
-        <button type="button">Contact Me</button>
-        <button type="button">View CV</button>
-      </div>
+          <h1 class="hero-title">
+            Hi, I'm <span class="hero-gradient-text">Krishna Kant Pandey</span>
+          </h1>
+
+          <div style="min-height: 32px; margin-bottom: 14px;">
+            <span style="font-size: 1.25rem; font-weight: 700; color: var(--accent-cyan);">⚡ </span>
+            <span id="role-typewriter" style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); border-right: 2px solid var(--accent-primary); padding-right: 4px;"></span>
+          </div>
+
+          <p class="hero-subtitle">
+            B.Tech Computer Science student at <strong>Amity University Jharkhand</strong> (2023–2027). Dedicated to building high-performance backend systems with <strong>Java & Spring Boot</strong>, architecting robust RESTful APIs, and solving core algorithmic challenges through DSA and OOP.
+          </p>
+
+          <div class="btn-group">
+            <a href="projects.html" class="btn btn-primary">
+              <span>View Projects</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="resume.pdf" download="Krishna_Kant_Pandey_Resume.pdf" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download CV</span>
+            </a>
+            <a href="contact.html" class="btn btn-outline">
+              <span>Contact Me</span>
+            </a>
+          </div>
+
+          <!-- Academic & Skill Highlight Counters -->
+          <div class="hero-stats-row">
+            <div class="stat-item">
+              <span class="stat-num">2027</span>
+              <span class="stat-label">B.Tech CSE Amity Univ.</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">6.9</span>
+              <span class="stat-label">Academic CGPA</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">3+</span>
+              <span class="stat-label">Full Stack Projects</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">5</span>
+              <span class="stat-label">Certifications</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Profile Card -->
+        <div class="hero-visual">
+          <div class="hero-card-container">
+            <div class="hero-image-wrapper">
+              <img src="my picture.png" alt="Krishna Kant Pandey">
+            </div>
+
+            <!-- Floating Micro-Badge 1 -->
+            <div class="hero-floating-badge floating-badge-1">
+              <div class="badge-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div>
+                <div class="badge-text-primary">Spring Boot & Java</div>
+                <div class="badge-text-sub">10+ RESTful Endpoints</div>
+              </div>
+            </div>
+
+            <!-- Floating Micro-Badge 2 -->
+            <div class="hero-floating-badge floating-badge-2">
+              <div class="badge-icon-box" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              </div>
+              <div>
+                <div class="badge-text-primary">OpenAI Certified</div>
+                <div class="badge-text-sub">Agents & AI Foundations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Tech Stack Marquee / Pills -->
+      <section class="tech-strip-section">
+        <p class="tech-strip-title">Core Technologies & Tools</p>
+        <div class="tech-grid">
+          <div class="tech-pill">
+            <span style="color:#ef4444;font-weight:bold;">☕</span> Java (Core & Advanced)
+          </div>
+          <div class="tech-pill">
+            <span style="color:#10b981;font-weight:bold;">🍃</span> Spring Boot & Data JPA
+          </div>
+          <div class="tech-pill">
+            <span style="color:#3b82f6;font-weight:bold;">⚡</span> C++ / C
+          </div>
+          <div class="tech-pill">
+            <span style="color:#f59e0b;font-weight:bold;">🧩</span> Data Structures & Algorithms
+          </div>
+          <div class="tech-pill">
+            <span style="color:#06b6d4;font-weight:bold;">🐬</span> MySQL & Relational DB
+          </div>
+          <div class="tech-pill">
+            <span style="color:#6366f1;font-weight:bold;">🌐</span> RESTful Web APIs
+          </div>
+          <div class="tech-pill">
+            <span style="color:#facc15;font-weight:bold;">📜</span> JavaScript (ES6+)
+          </div>
+          <div class="tech-pill">
+            <span style="color:#e11d48;font-weight:bold;">🎨</span> HTML5 & CSS3 Responsive
+          </div>
+          <div class="tech-pill">
+            <span style="color:#8b5cf6;font-weight:bold;">🌿</span> Git & GitHub
+          </div>
+          <div class="tech-pill">
+            <span style="color:#14b8a6;font-weight:bold;">💻</span> VS Code & IntelliJ IDEA
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects Section -->
+      <section class="section-wrapper">
+        <div class="section-head-row">
+          <div>
+            <p class="eyebrow">Portfolio Spotlight</p>
+            <h2>Featured Projects</h2>
+          </div>
+          <a href="projects.html" class="view-all-link">
+            <span>View All Projects</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Featured Project 1 -->
+          <article class="project-card">
+            <span class="project-badge-type">Full Stack & AI</span>
+            <h3 class="project-title">AI Smart Healthcare & Triage System</h3>
+            <ul class="project-bullets">
+              <li>Engineered an AI Symptom Triage Engine that evaluates natural language complaints to categorize risk severity (Critical to Low) with emergency alerts.</li>
+              <li>Architected 10+ Spring Boot and JPA REST APIs for real-time doctor appointment bookings, patient record tracking, and prescriptions.</li>
+              <li>Role-based workflows for Patients, Doctors, and Admins with doctor availability scheduling and system metrics.</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">Spring Boot</span>
+              <span class="tech-tag">Spring Data JPA</span>
+              <span class="tech-tag">REST APIs</span>
+              <span class="tech-tag">AI/NLP Triage</span>
+              <span class="tech-tag">HTML5/CSS3/JS</span>
+            </div>
+            <div class="project-actions">
+              <a href="projects.html" class="btn btn-secondary" style="padding: 9px 18px; font-size: 0.88rem;">
+                <span>Full Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://github.com/KrishnaSujal126" target="_blank" rel="noreferrer" class="btn btn-outline" style="padding: 9px 16px; font-size: 0.88rem;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Featured Project 2 -->
+          <article class="project-card">
+            <span class="project-badge-type">Full Stack & Database</span>
+            <h3 class="project-title">College PYQ Management System</h3>
+            <ul class="project-bullets">
+              <li>Engineered a centralized web portal for university students to search, filter by branch/semester, and download previous years' examination papers.</li>
+              <li>Implemented secure Spring Boot REST APIs with MySQL database integration for indexing, categorizing, and serving academic PDFs.</li>
+              <li>Designed a lightweight, responsive interface featuring dynamic search filtering and responsive table previews.</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">Spring Boot</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">Spring Data JPA</span>
+              <span class="tech-tag">REST APIs</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+            <div class="project-actions">
+              <a href="projects.html" class="btn btn-secondary" style="padding: 9px 18px; font-size: 0.88rem;">
+                <span>Full Details</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://github.com/KrishnaSujal126" target="_blank" rel="noreferrer" class="btn btn-outline" style="padding: 9px 16px; font-size: 0.88rem;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Why Hire Me / Core Strengths -->
+      <section class="section-wrapper">
+        <div class="page-header" style="margin-bottom: 24px;">
+          <p class="eyebrow">Core Strengths</p>
+          <h2>Engineering Principles & Value</h2>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3>Scalable Backend & APIs</h3>
+            <p>Hands-on proficiency in Spring Boot, Spring Data JPA, RESTful architecture, relational database indexing in MySQL, and role-based access management.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box" style="background:rgba(99, 102, 241, 0.12); color:#818cf8;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <h3>Algorithmic Problem Solving</h3>
+            <p>Solid grasp of Data Structures & Algorithms, Object-Oriented Programming (OOP) in C++ and Java, memory management, and clean code principles.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box" style="background:rgba(16, 185, 129, 0.12); color:#10b981;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <h3>Driven & Fast Learner</h3>
+            <p>Completed certifications from OpenAI Academy in AI Foundations and Workflows, Thiranex Full Stack Internship, and continuously preparing for SDE placements.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Call To Action -->
+      <section style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.12) 100%); border: 1px solid var(--border-hover); border-radius: var(--radius-lg); padding: 40px; text-align: center; margin-top: 20px;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 12px;">Let's Build Something Exceptional Together</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 24px; font-size: 1.05rem;">
+          Looking for a proactive, technical, and fast-learning Software Development intern? I'm ready to bring value to your engineering team.
+        </p>
+        <div class="btn-group" style="justify-content: center;">
+          <a href="contact.html" class="btn btn-primary">
+            <span>Get In Touch</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </a>
+          <a href="cv.html" class="btn btn-secondary">
+            <span>View Full Resume</span>
+          </a>
+        </div>
+      </section>
     </main>
   </div>
 
