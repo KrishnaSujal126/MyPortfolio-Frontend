@@ -4,4 +4,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /api/
 
-Sitemap: https://myportfolio-frontend.vercel.app/sitemap.xml
+Sitemap: https://my-portfolio-frontend-ten-omega.vercel.app/sitemap.xml
